@@ -15,18 +15,18 @@ const int GEAR_REVERSE = 6;
 const int GEAR_UP = 16;
 const int GEAR_DOWN = 10;
 
-// Pin map, should match buttonStates ordering
+// Pin map, should match gearStates ordering
 const int BUTTON_MAP [TOTAL_BUTTON_COUNT] = {
   GEAR_1, GEAR_2, GEAR_3,
   GEAR_4, GEAR_5, GEAR_6,
   GEAR_REVERSE, GEAR_UP, GEAR_DOWN
 };
 
-// 12 Digital pins, should match BUTTON_MAP ordering
-int buttonStates [12] = {
-  0, 0, 0, 0,
-  0, 0, 0, 0,
-  0, 0, 0, 0
+// Gear states, should match BUTTON_MAP ordering
+int gearStates [TOTAL_BUTTON_COUNT] = {
+  0, 0, 0,
+  0, 0, 0, 
+  0, 0, 0 
 };
 
 Joystick_ Joystick(
@@ -68,9 +68,9 @@ void setTransmission() {
     int value = !digitalRead(BUTTON_MAP[i]);
     
     // New button state
-    if (value != buttonStates[i]) {
+    if (value != gearStates[i]) {
       Joystick.setButton(i, value);
-      buttonStates[i] = value;
+      gearStates[i] = value;
       break;
     }
   }
